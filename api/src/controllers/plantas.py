@@ -1,23 +1,21 @@
 from flask import Flask
-from flask_restx import Api, Resource
+from flask_restx import Resource
 
-from src.server.initiate import server
+from src.ext.api import api
+from src.ext.app import app
 from src.models.plantas import planta
-from src.database.database import database
-from src.database.plantas import Plantas
-
-app, api = server.app, server.api
+# from src.database import plantas
 
 books_db = [
     {'id': 0, 'Title': 'War and Peace'},
     {'id': 1, 'Title': 'Clean Code'}
 ]
 
-@api.route('/plantas')
+@app.route('/plantas')
 class BookList(Resource):
     @api.marshal_list_with(planta)
     def get(self,):
-        return database.engine.execute('SELECT * FROM aps_8.plantas;')
+        return books_db
 
     @api.expect(planta, validate=True)
     @api.marshal_with(planta)

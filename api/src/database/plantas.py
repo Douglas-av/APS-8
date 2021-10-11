@@ -2,10 +2,13 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
 from src.database.database import database
+from src.server.initiate import server
 
-Base = declarative_base()
+db = server.db
 
-class Plantas(Base):
+# Base = declarative_base()
+
+class Plantas(db.Model):
     __tablename__ = 'plantas'
 
     numero = Column(Integer, primary_key=True, autoincrement=True)
@@ -19,6 +22,11 @@ class Plantas(Base):
 
     def __repr__(self):
         return f'Plantas {self.name}'
+    
+def get():
+    plantas = Plantas.query.all()
+    print(plantas)
+    return plantas
 
-
-Base.metadata.create_all(database.engine)
+db.create_all()
+# Base.metadata.create_all(database.engine)

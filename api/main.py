@@ -1,4 +1,9 @@
-from src.server.initiate import server
-from src.database.plantas import *
+from src.ext.app import app
+from src.ext import api
+from src.ext import database
 
-server.run()
+
+
+database.init_app(app)
+api.init_app(app)
+app.run(debug=True)
