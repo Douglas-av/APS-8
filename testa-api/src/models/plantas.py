@@ -23,5 +23,14 @@ class Plantas(db.Model):
     altura_media = db.Column(db.String(255), unique=True, nullable=False)
     descricao = db.Column(db.String(1000), unique=True, nullable=False)
 
+    def __init__(self, request):
+        self.nome_popular = request['nome_popular']
+        self.nome_cientifico = request['nome_cientifico']
+        self.luminosidade = request['luminosidade']
+        self.origem = request['origem']
+        self.familia = request['familia']
+        self.altura_media = request['altura_media']
+        self.descricao = request['descricao']
+
     def __repr__(self):
         return '<Plantas %r>' % self.name
