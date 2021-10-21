@@ -1,26 +1,32 @@
-from flask import Flask
 from flask_restx import Resource
 
-from src.ext.api import api
-from src.ext.app import app
+from src.server.app import server
 from src.models.plantas import planta
-# from src.database import plantas
+from src.views.plantas import plantas_view
 
-books_db = [
-    {'id': 0, 'Title': 'War and Peace'},
-    {'id': 1, 'Title': 'Clean Code'}
+app, api = server.app, server.api
+
+plantas_test = [
+     {
+        "nome_popular": 'rodorfo',
+        "nome_cientifico": 'acifikdo',
+        "luminosidade": 'sol',
+        "origem": 'inferno',
+        "familia": 'grande',
+        "altura_media": '1 ou 100',
+        "descricao": 'planta'
+    }
 ]
 
-@app.route('/plantas')
-class BookList(Resource):
+@api.route('/plantas')
+class PlantasView(Resource):
     @api.marshal_list_with(planta)
     def get(self,):
-        return books_db
+        return plantas_view.get_plantas()
 
     @api.expect(planta, validate=True)
     @api.marshal_with(planta)
     def post(self,):
-        response = api.payload
-        print(response)
-        books_db.append(response)
-        return response, 200
+        # response = api.payload
+        # plantas_test.append(response)
+        return plantas_view.post_planta()
