@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import query
 
 config = configparser.ConfigParser()
-config.read(r'C:\Users\dougl\Desktop\APS-8\APS-8_api-python\testa-api\config.ini')
+config.read(r'C:\Users\dougl\Desktop\APS-8\APS-8_api-python\api\config.ini')
 
 class Database():
     def __init__(self,):

@@ -3,6 +3,7 @@ from flask_restx import fields
 from src.server.app import server
 
 planta = server.api.model('Planta', {
+    'numero': fields.Integer(required=False, min_Lenght=1, max_Lenght=101, description='Informar o ID(numero) da planta. (opcional)'),
     'nome_popular': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Informar o nome popular da planta'),
     'nome_cientifico': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Informar o nome cientifico dado para a planta'),
     'luminosidade': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Informar a luminosidade da planta'),
