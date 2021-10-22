@@ -5,4 +5,4 @@ from src.helper.help import Help
 help = Help(server.engine)
 help.inserirExcel()
 
-server.run()
+server.app.run()

@@ -18,8 +18,5 @@ class App():
             description='Simple book API',
             doc='/docs'
         )
-    
-    def run(self,):
-        self.app.run(debug=True)
 
 server = App()
