@@ -1,9 +1,7 @@
-import configparser
 from sqlalchemy import create_engine
 from sqlalchemy.orm import query
 
-config = configparser.ConfigParser()
-config.read(r'C:\Users\dougl\Desktop\APS-8\APS-8_api-python\api\config.ini')
+from src.helper.help import config
 
 class Database():
     def __init__(self,):
