@@ -10,6 +10,7 @@ planta = server.api.model('Planta', {
     'origem': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Informar a origem da planta'),
     'continente': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Informar o continente de origem da planta'),
     'familia': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='informar de qual familia a planta pertence'),
+    'tipo': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Informar o tipo da planta'),
     'altura_media': fields.String(required=True, min_Lenght=1, max_Lenght=255, description='Altura media da planta'),
     'descricao': fields.String(required=True, min_Lenght=1, max_Lenght=1000, description='Breve descrição da planta')
 })
@@ -23,6 +24,7 @@ class Plantas(db.Model):
     origem = db.Column(db.String(255), unique=False, nullable=False)
     continente = db.Column(db.String(255),unique=False, nullable=False)
     familia = db.Column(db.String(255), unique=False, nullable=False)
+    tipo = db.Column(db.String(255), unique=False, nullable=False)
     altura_media = db.Column(db.String(255), unique=False, nullable=False)
     descricao = db.Column(db.String(1000), unique=False, nullable=False)
 

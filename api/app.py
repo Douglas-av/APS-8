@@ -3,6 +3,7 @@ from src.controllers.plantas import *
 from src.helper.help import Help
 
 help = Help(server.engine)
-help.inserirExcel()
+# help.inserirExcel()
+help.inserirImagens()
 
 server.app.run()

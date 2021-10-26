@@ -18,7 +18,7 @@ plantas_test = [
     }
 ]
 
-@api.route('/plantas')
+@api.route('/plantas', methods=['GET', 'POST'])
 class PlantasView(Resource):
     @api.marshal_list_with(planta)
     def get(self,):
@@ -30,3 +30,14 @@ class PlantasView(Resource):
         # response = api.payload
         # plantas_test.append(response)
         return plantas_view.post_planta()
+
+@api.route('/imagem/<int:id>', methods=['GET', 'PUT'])
+class ImagemView(Resource):
+    @api.marshal_with(planta)
+    def get(self, id):
+        return plantas_view.get_imagem(id)
+
+    @api.expect(planta, validate=True)
+    @api.marshal_with(planta)
+    def put(self, id):
+        return plantas_view.post_imagem(id)
