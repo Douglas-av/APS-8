@@ -1,4 +1,8 @@
-from flask import abort, request
+import io
+import numpy as np
+from base64 import encodebytes
+from PIL import Image
+from flask import abort, request, send_file, render_template
 from flask_restx import Resource
 
 from src.models.plantas import Plantas as ModelPlantas
@@ -19,9 +23,9 @@ class Plantas(Resource):
     
     def get_imagem(self, id):
         imagem = ModelPlantasImagem.query.get(id) or abort(404)
-        return imagem, 200
+        return send_file(io.BytesIO(imagem.imagem), mimetype='image/jpeg')
     
-    def post_imagem(self, id):
+    def post_imagem(self,):
         imagem = ModelPlantasImagem(request.json)
         db.session.add(imagem)
         db.session.commit()

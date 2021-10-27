@@ -1,9 +1,9 @@
 from src.server.app import server
 from src.controllers.plantas import *
-from src.helper.help import Help
+# from src.helper.help import Help
 
-help = Help(server.engine)
+# help = Help(server.engine)
 # help.inserirExcel()
-help.inserirImagens()
+# help.inserirImagens()
 
 server.app.run()

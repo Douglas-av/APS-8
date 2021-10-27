@@ -33,11 +33,9 @@ class PlantasView(Resource):
 
 @api.route('/imagem/<int:id>', methods=['GET', 'PUT'])
 class ImagemView(Resource):
-    @api.marshal_with(planta)
     def get(self, id):
         return plantas_view.get_imagem(id)
 
     @api.expect(planta, validate=True)
-    @api.marshal_with(planta)
     def put(self, id):
         return plantas_view.post_imagem(id)

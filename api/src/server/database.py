@@ -7,12 +7,12 @@ class Database():
     def __init__(self,):
         self.create_db()
         self.conectionString = f"{config['DATABASE']['db_type']}://{config['DATABASE']['user']}:{config['DATABASE']['passwd']}@{config['DATABASE']['host']}:{config['DATABASE']['port']}/{config['DATABASE']['db']}"
-        self.engine = create_engine(self.conectionString, echo=True)
+        self.engine = create_engine(self.conectionString)
     
     def create_db(self):
         conectionString = f"{config['DATABASE']['db_type']}://{config['DATABASE']['user']}:{config['DATABASE']['passwd']}@{config['DATABASE']['host']}:{config['DATABASE']['port']}"
         query = f"CREATE DATABASE IF NOT EXISTS {config['DATABASE']['db']};"
-        engine = create_engine(conectionString, echo=True)
+        engine = create_engine(conectionString)
         engine.execute(query)
 
 database = Database()

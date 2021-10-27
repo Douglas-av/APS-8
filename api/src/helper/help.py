@@ -1,5 +1,5 @@
-import requests
 import os
+from sqlalchemy import text
 import configparser
 import pandas as pd
 import numpy as np
@@ -40,11 +40,13 @@ class Help():
                         for imagem in os.listdir(tipo):
                             path_imagens.append(os.path.join(tipo, imagem))
         path_imagens = np.unique(path_imagens)
-
+        i = 1
         for pathImg in path_imagens:
-            print(pathImg)
-
-            self.engine.execute("INSERT INTO aps_8_flora.plantas_imagem (imagem) VALUES (%s)", (pathImg,))
+            with open(pathImg, 'rb') as f:
+                f = f.read()
+            self.engine.execute("INSERT INTO aps_8_flora.plantas_imagem (imagem) VALUES (%b)", [f])
+        i += 1
+        print('inseriu Imagens')
             #print(pathImg)
             # files = [
             #     ('image', ('1.jpg', open(pathImg, 'rb'), 'image/jpeg'))
