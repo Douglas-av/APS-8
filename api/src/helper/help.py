@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 config = configparser.ConfigParser()
-config.read(r'C:\Users\dougl\Desktop\APS-8\APS-8_api-python\api\config.ini')
+config.read(r'C:\Users\dougl\Desktop\APS-8_api\APS-8_api-python\api\config.ini')
 
 class Help():
     def __init__(self, engine):
@@ -42,9 +42,11 @@ class Help():
         path_imagens = np.unique(path_imagens)
         i = 1
         for pathImg in path_imagens:
+            print('-----' + pathImg[-9:][1:].split('.')[0].split('p')[1] + '\n######## ' + pathImg)
+            id = int(pathImg[-9:][1:].split('.')[0].split('p')[1])
             with open(pathImg, 'rb') as f:
                 f = f.read()
-            self.engine.execute("INSERT INTO aps_8_flora.plantas_imagem (imagem) VALUES (%b)", [f])
+            self.engine.execute("INSERT INTO aps_8_flora.plantas_imagem (id_planta, imagem) VALUES (%s, %b)", [id, f])
         i += 1
         print('inseriu Imagens')
             #print(pathImg)

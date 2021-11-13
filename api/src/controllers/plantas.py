@@ -18,7 +18,7 @@ plantas_test = [
     }
 ]
 
-@api.route('/plantas', methods=['GET', 'POST'])
+@api.route('/plantas', methods=['GET', 'POST', 'PUT', 'DELETE'])
 class PlantasView(Resource):
     @api.marshal_list_with(planta)
     def get(self,):
@@ -30,8 +30,21 @@ class PlantasView(Resource):
         # response = api.payload
         # plantas_test.append(response)
         return plantas_view.post_planta()
+    
+    def put(self,):
+        return plantas_view.put_planta()
+    
+    def delete(self,):
+        return plantas_view.delete_planta()
 
-@api.route('/imagem/<int:id>', methods=['GET', 'PUT'])
+
+@api.route('/plantas/<string:continente>', methods=['GET'])
+class PlantasContinenteView(Resource):
+    @api.marshal_list_with(planta)
+    def get(self, continente):
+        return plantas_view.get_plantas_continente(continente)
+
+@api.route('/imagem/<int:id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 class ImagemView(Resource):
     def get(self, id):
         return plantas_view.get_imagem(id)
@@ -39,3 +52,9 @@ class ImagemView(Resource):
     @api.expect(planta, validate=True)
     def put(self, id):
         return plantas_view.post_imagem(id)
+    
+    def put(self, id):
+        return plantas_view.put_imagem(id)
+
+    def delete(self, id):
+        return plantas_view.delete_imagem(id)

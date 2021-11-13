@@ -19,17 +19,51 @@ class Plantas(Resource):
         nova_planta = ModelPlantas(request.json)
         db.session.add(nova_planta)
         db.session.commit()
-        return self.get_plantas(), 200
+        return self.get_plantas(), 200    
+
+    def put_planta(self, id):
+        planta = ModelPlantas.query.filter(ModelPlantas.id == id).first() or abort(404)
+        planta.update(request.json)
+        db.session.commit()
+        return planta, 200
+
+    def delete_planta(self, id):
+        planta = ModelPlantas.query.filter(ModelPlantas.id == id).first() or abort(404)
+        imagem = ModelPlantasImagem.query.filter(ModelPlantasImagem.id_planta == id).first() or abort(404)
+        db.session.delete(imagem)
+        db.session.delete(planta)
+        db.session.commit()
+        return planta, 200
     
     def get_imagem(self, id):
-        imagem = ModelPlantasImagem.query.get(id) or abort(404)
+        imagem = ModelPlantasImagem.query.filter(ModelPlantasImagem.id_planta == id).first() or abort(404)
         return send_file(io.BytesIO(imagem.imagem), mimetype='image/jpeg')
-    
+
     def post_imagem(self,):
         imagem = ModelPlantasImagem(request.json)
         db.session.add(imagem)
         db.session.commit()
         return self.get_plantas(), 200
+
+    def put_imagem(self, id):
+        imagem = ModelPlantasImagem.query.filter(ModelPlantasImagem.id_planta == id).first() or abort(404)
+        imagem.update(request.json)
+        db.session.commit()
+        return imagem, 200
+    
+    def delete_imagem(self, id):
+        imagem = ModelPlantasImagem.query.filter(ModelPlantasImagem.id_planta == id).first() or abort(404)
+        db.session.delete(imagem)
+        db.session.commit()
+        return imagem, 200
+
+    def get_plantas_continente(self, continente):
+        plantas = ModelPlantas.query.filter(ModelPlantas.continente == continente).all() or abort(404)
+        return plantas
+    
+    
+
+    
 
 
 plantas_view = Plantas()
