@@ -31,11 +31,20 @@ class PlantasView(Resource):
         # plantas_test.append(response)
         return plantas_view.post_planta()
     
-    def put(self,):
-        return plantas_view.put_planta()
+@api.route('/plantas/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+class PlantasIdView(Resource):
+
+    @api.marshal_with(planta)
+    def get(self, id):
+        return plantas_view.get_planta(id)
+
+    @api.marshal_with(planta)
+    def put(self, id):
+        return plantas_view.put_planta(id)
     
-    def delete(self,):
-        return plantas_view.delete_planta()
+    @api.marshal_with(planta)
+    def delete(self, id):
+        return plantas_view.delete_planta(id)
 
 
 @api.route('/plantas/<string:continente>', methods=['GET'])

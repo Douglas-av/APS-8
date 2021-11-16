@@ -35,6 +35,7 @@ class Plantas(db.Model):
         self.origem = request['origem']
         self.continente = request['continente']
         self.familia = request['familia']
+        self.tipo = request['tipo']
         self.altura_media = request['altura_media']
         self.descricao = request['descricao']
 
