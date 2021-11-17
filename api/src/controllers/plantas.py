@@ -29,6 +29,7 @@ class PlantasView(Resource):
     def post(self,):
         # response = api.payload
         # plantas_test.append(response)
+        print(api.payload)
         return plantas_view.post_planta()
     
 @api.route('/plantas/<int:id>', methods=['GET', 'PUT', 'DELETE'])

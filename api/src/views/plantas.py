@@ -21,6 +21,7 @@ class Plantas(Resource):
 
     def post_planta(self,):
         nova_planta = ModelPlantas(request.json)
+        print(nova_planta)
         db.session.add(nova_planta)
         db.session.commit()
         return self.get_plantas(), 200    

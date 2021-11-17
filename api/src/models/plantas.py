@@ -39,7 +39,7 @@ class Plantas(db.Model):
         self.altura_media = request['altura_media']
         self.descricao = request['descricao']
 
-    def __repr__(self):
-        return '<Plantas %r>' % self.name
+    # def __repr__(self):
+    #     return '<Plantas %r>' % self.name
 
 db.create_all()
