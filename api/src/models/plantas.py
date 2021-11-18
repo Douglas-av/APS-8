@@ -39,6 +39,17 @@ class Plantas(db.Model):
         self.altura_media = request['altura_media']
         self.descricao = request['descricao']
 
+    def update(self, request):
+        self.nome_popular = request['nome_popular']
+        self.nome_cientifico = request['nome_cientifico']
+        self.luminosidade = request['luminosidade']
+        self.origem = request['origem']
+        self.continente = request['continente']
+        self.familia = request['familia']
+        self.tipo = request['tipo']
+        self.altura_media = request['altura_media']
+        self.descricao = request['descricao']
+        
     # def __repr__(self):
     #     return '<Plantas %r>' % self.name
 
